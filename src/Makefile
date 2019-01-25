@@ -2,7 +2,7 @@ CFLAGS	= -O3 -g -Wall -fopenmp --std=c++11 -lboost_system -lboost_thread
 LDFLAGS	= -fopenmp -lm -m64
 CC	= g++
 
-CFILES	= lmerindex.cpp coral-main.cpp multi-align.cpp main.cpp
+CFILES	= lmerindex.cpp elmeri-main.cpp multi-align.cpp main.cpp
 HFILES  = lmerindex.hpp
 
 EXTRA = Makefile README.md COPYING
@@ -10,7 +10,7 @@ EXTRA = Makefile README.md COPYING
 OBJS	= $(CFILES:.cpp=.o)
 
 # Files to compile Elmeri
-OBJSE	= lmerindex.o coral-main.o multi-align.o
+OBJSE	= lmerindex.o elmeri-main.o multi-align.o
 
 PROG	= elmeri
 VERSION = 0.1
