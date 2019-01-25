@@ -19,17 +19,17 @@ Copy the repository to your own machine and run make in the src directory.
 
 elmeri [parameters]
 
-Required parameters:|
----|---
--i <input file>     | Input file of Rmaps to be corrected
--o <output file>    | Output file for corrected Rmaps
+| Required parameters: |  |
+| --- | --- |
+| -i <input file>     | Input file of Rmaps to be corrected |
+| -o <output file>    | Output file for corrected Rmaps |
 
-Optional parameters:|
---|--
--l <ell>            | Size of (el,k)-mers in kbp (default: 80)
--k <k>              | Minimum size of (el,k)-mers in number of fragments (default: 5)
--s <spacing pattern>| Spacing pattern for spaced seeds.(default: 11111111110001110110010010011101001110001010010100001010011000010111100000001100)
--c <coverage>        | Maximum number of Rmaps in an alignment. If set to > 64, will be reset to 64. (default: 64)
+| Optional parameters: |   |
+| --- | --- |
+| -l <ell>            | Size of (el,k)-mers in kbp (default: 80) |
+|< -k <k>              | Minimum size of (el,k)-mers in number of fragments (default: 5) |
+| -s <spacing pattern> | Spacing pattern for spaced seeds.(default: 11111111110001110110010010011101001110001010010100001010011000010111100000001100) |
+| -c <coverage>         | Maximum number of Rmaps in an alignment. If set to > 64, will be reset to 64. (default: 64) |
 
 ## Example
 
