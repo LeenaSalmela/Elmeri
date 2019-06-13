@@ -84,13 +84,15 @@ public:
   int mink;
   // The gap pattern when using el-mers. Use a gap pattern with no *'s if you want a regular el-mer.
   char *gap_pattern;
-
+  // Threshold for the similarity of mers to merge their list of Rmap
+  int mer_similarity_thrs;
+  
   // Quantize a fragment length
   int quantize(double d);
   // Extract el-mers (or k-mers) and their starting positions from a sequence of cut sites
   std::unordered_set<std::pair<std::string, int> > extract_lmers(std::vector<double> cuts, int ell, char *gap_pattern);
   // Reads Rmaps from <filename> and creates the index mapping the mers to their Rmaps
-  void init(char *filename, int l, int k, char *gp);
+  void init(char *filename, int l, int k, char *gp, int sim);
   // Insert a single Rmap into the mer->Rmap map
   void insert(std::vector<double> cuts, int rmap_count);
   // Merge the sets of Rmaps containing a given mer for mers that are similar to each other

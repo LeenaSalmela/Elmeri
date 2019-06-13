@@ -56,6 +56,7 @@ void usage(char *prog_name) {
  * -k <k> (default: 5)
  * -s <spacing pattern> (default: 11111111110001110110010010011101001110001010010100001010011000010111100000001100)
  * -c <coverage> (default: 64, maximum number of Rmaps in an alignment, if set to > 64, will be reset to 64)
+ * -t <similarity threshold> (default: 5, threshold for merging similar (el,k)-mers in the index)
  */
 int main(int argc, char *argv[]) {
 
@@ -68,6 +69,7 @@ int main(int argc, char *argv[]) {
     char *gap_pattern = (char *)"11111111110001110110010010011101001110001010010100001010011000010111100000001100";
 
     int coverage=ALIGN_SIZE;
+    int sim_threshold=MER_SIMILARITY_THRS;
     
     while(argc > 0) {
       if (!strcmp(argv[0], "-i")) {
@@ -132,6 +134,16 @@ int main(int argc, char *argv[]) {
 	argc--;
 	argv++;
       }
+      if (!strcmp(argv[0], "-t")) {
+	if (argc > 1) {
+	  sim_threshold = atoi(argv[1]);
+	} else {
+	  usage(prog_name);
+	  return 1;
+	}
+	argc--;
+	argv++;
+      }
 
       argc--;
       argv++;
@@ -146,7 +158,7 @@ int main(int argc, char *argv[]) {
     lmer_index lind;
     
     // Read the Rmaps and initialize the index
-    lind.init(infilename, ell, mink, gap_pattern);
+    lind.init(infilename, ell, mink, gap_pattern, sim_threshold);
     int total_reads = lind.rmaps.size();
 
     /* Find for each read other reads that shares most (el,k)-mers with it */

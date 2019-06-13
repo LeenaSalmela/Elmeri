@@ -283,12 +283,13 @@ void lmer_index::insert(std::vector<double> cuts, int rmap_count) {
  * - Read Rmaps from filename and insert them to the vector of Rmaps
  * - Construct the mer->Rmap map
  */
-void lmer_index::init(char *filename, int l, int k, char *gp) {
+void lmer_index::init(char *filename, int l, int k, char *gp, int sim) {
   // Save the parameters of the index
   ell = l;
   mink = k;
   gap_pattern = gp;
-
+  mer_similarity_thrs = sim;
+  
 #ifdef KMER_INDEX
   if (ell < 3 || ell > 10) {
     std::cout << "Invalid value for k: " << ell << std::endl;
@@ -391,7 +392,7 @@ void lmer_index::merge() {
   // In each round we merge sets of Rmaps for mers that differ by 1
   int round = 0;
   
-  while(round < MER_SIMILARITY_THRS) {
+  while(round < mer_similarity_thrs) {
     round++;
     // Use the old sets of Rmaps when merging to avoid propagating longer that distance 1 in each round
     // Therefore we save the old sets here
@@ -470,7 +471,7 @@ void lmer_index::merge() {
   // further with some other mer.
   std::unordered_map<std::string, std::string> mergetree;
   
-  while(round < MER_SIMILARITY_THRS) {
+  while(round < mer_similarity_thrs) {
     round++;
     
     // Iterate over the mers
@@ -491,7 +492,7 @@ void lmer_index::merge() {
       // The current mer has already been merged with to a mer that
       // differs from this one by MER_SIMILARITY_THRS. Thus we cannot
       // merge it anymore.
-      if (q_count +1 > MER_SIMILARITY_THRS)
+      if (q_count +1 > mer_similarity_thrs)
 	continue;
       
       // Form all mers such that the quantization of one fragment
@@ -523,7 +524,7 @@ void lmer_index::merge() {
 	  // Merge the mers if they are not already merged and the
 	  // length of the total merge paths does not exceed
 	  // MER_SIMILARITY_THRS
-	  if (q != q2 && q_count+q2_count+1 <= MER_SIMILARITY_THRS) {
+	  if (q != q2 && q_count+q2_count+1 <= mer_similarity_thrs) {
 	    // Merge the smaller set to the larger
 	    if (map[q2]->size() <= map[q]->size()) {
 	      map[q]->insert(map[q2]->begin(), map[q2]->end());
@@ -536,7 +537,7 @@ void lmer_index::merge() {
 	      q = q2;
 	      q_count++;
 	      // Check if the current mer now has maximal merge path length 
-	      if (q_count+1 > MER_SIMILARITY_THRS)
+	      if (q_count+1 > mer_similarity_thrs)
 		break;
 	    }
 	  }
@@ -544,7 +545,7 @@ void lmer_index::merge() {
       }
 
       // Check if the current mer now has maximal merge path length 
-      if (q_count +1 > MER_SIMILARITY_THRS)
+      if (q_count +1 > mer_similarity_thrs)
 	continue;
 
       // Form all mers such that the quantization of one fragment
@@ -576,7 +577,7 @@ void lmer_index::merge() {
 	  // Merge the mers if they are not already merged and the
 	  // length of the total merge paths does not exceed
 	  // MER_SIMILARITY_THRS
-	  if (q != q2 && q_count+q2_count+1 <= MER_SIMILARITY_THRS) {
+	  if (q != q2 && q_count+q2_count+1 <= mer_similarity_thrs) {
 	    // Merge the smaller set to the larger
 	    if (map[q2]->size() <= map[q]->size()) {
 	      map[q]->insert(map[q2]->begin(), map[q2]->end());
@@ -589,7 +590,7 @@ void lmer_index::merge() {
 	      q = q2;
 	      q_count++;
 	      // Check if the current mer now has maximal merge path length 
-	      if (q_count+1 > MER_SIMILARITY_THRS)
+	      if (q_count+1 > mer_similarity_thrs)
 		break;
 	    }
 	  }
@@ -618,7 +619,7 @@ void lmer_index::merge() {
  * Merge the set of Rmaps for mers that are similar
  */
 void lmer_index::merge() {
-  if (MER_SIMILARITY_THRS <= 0)
+  if (mer_similarity_thrs <= 0)
     return;
 
 
@@ -653,7 +654,7 @@ void lmer_index::merge() {
 
       // The current mer has already been merged too many mers. Thus
       // we cannot merge it anymore.
-      if (qsize +1 > MER_SIMILARITY_THRS)
+      if (qsize +1 > mer_similarity_thrs)
 	continue;
       
       // Form all mers such that the quantization of one fragment
@@ -686,7 +687,7 @@ void lmer_index::merge() {
 
 	  // Merge the mers if they are not already merged and the
 	  // size of the merged sets does not exceed MER_SIMILARITY_THRS
-	  if (q != q2 && qsize+q2size <= MER_SIMILARITY_THRS) {
+	  if (q != q2 && qsize+q2size <= mer_similarity_thrs) {
 	    // Merge the smaller set to the larger
 	    if (map[q2]->size() <= map[q]->size()) {
 	      map[q]->insert(map[q2]->begin(), map[q2]->end());
@@ -702,14 +703,14 @@ void lmer_index::merge() {
 	    }
 	    qsize = qsize+q2size;
 	    // Check if the current mer now has maximal merge path length 
-	    if (qsize >= MER_SIMILARITY_THRS)
+	    if (qsize >= mer_similarity_thrs)
 	      break;
 	  }
 	}
       }
 
       // Check if the current mer now has maximal merge path length 
-      if (qsize >= MER_SIMILARITY_THRS)
+      if (qsize >= mer_similarity_thrs)
 	continue;
 
       // Form all mers such that the quantization of one fragment
@@ -742,7 +743,7 @@ void lmer_index::merge() {
 
 	  // Merge the mers if they are not already merged and the
 	  // size of the merged sets does not exceed MER_SIMILARITY_THRS
-	  if (q != q2 && qsize+q2size <= MER_SIMILARITY_THRS) {
+	  if (q != q2 && qsize+q2size <= mer_similarity_thrs) {
 	    // Merge the smaller set to the larger
 	    if (map[q2]->size() <= map[q]->size()) {
 	      map[q]->insert(map[q2]->begin(), map[q2]->end());
@@ -756,7 +757,7 @@ void lmer_index::merge() {
 	    }
 	    qsize = qsize+q2size;
 	    // Check if the current mer now has maximal merge path length 
-	    if (qsize >= MER_SIMILARITY_THRS)
+	    if (qsize >= mer_similarity_thrs)
 	      break;
 	  }
 	}

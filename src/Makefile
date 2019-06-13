@@ -20,7 +20,7 @@ OBJSEI	= lmerindex.o main.o
 
 PROGEI	= elmeri-index
 
-all:		$(PROG)
+all:		$(PROG) $(PROGEI)
 
 $(PROG):	$(OBJSE)
 		$(CC) $(LDFLAGS) -o $@ $(OBJSE)

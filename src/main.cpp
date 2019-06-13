@@ -40,7 +40,7 @@
  * - threshold for the number of shared mers to consider two Rmaps related
  */
 int main(int argc, char *argv[]) {
-  if (argc != 6) {
+  if (argc != 7) {
     std::cout << "Invalid arguments." << std::endl;
     exit(2);
   }
@@ -51,12 +51,13 @@ int main(int argc, char *argv[]) {
   char *output = argv[3];
   char *gap_pattern = argv[4];
   unsigned int  count_thrs = atoi(argv[5]);
+  unsigned int merge_thrs = atoi(argv[6]);
   
   // The el-mer, k-mer or (el,k)-mer index
   lmer_index lind;
 
   // Read the Rmaps and initialize the index
-  lind.init(rmapfile, ell, MINK, gap_pattern);
+  lind.init(rmapfile, ell, MINK, gap_pattern, merge_thrs);
 
 #if 0
   // Debugging: print out all Rmaps in the index

@@ -30,6 +30,7 @@ elmeri [parameters]
 | -k <k>              | Minimum size of (el,k)-mers in number of fragments (default: 5) |
 | -s <spacing pattern> | Spacing pattern for spaced seeds.(default: 11111111110001110110010010011101001110001010010100001010011000010111100000001100) |
 | -c <coverage>         | Maximum number of Rmaps in an alignment. If set to > 64, will be reset to 64. (default: 64) |
+| -t <similarity threshold> | Threshold for merging similar (el,k)-mers in the index. (default: 5) |
 
 ## Example
 
