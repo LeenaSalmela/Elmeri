@@ -9,7 +9,7 @@ Fast and accurate correction of optical mapping data with spaced seeds
 
 ## System Requirements
 
-Elmeri has been tested on systems running Linux on a X86_64 architecture.
+Elmeri has been tested on systems running Linux on a X86_64 architecture. Elmeri requires that the boost library is available.
 
 ## Installation
 
