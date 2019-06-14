@@ -34,8 +34,8 @@ elmeri [parameters]
 
 The default parameters work well on small to medium sized genomes when
 the coverage of the Rmaps is high. For a large genome such as the
-human genome, setting k to a higher value (i.e. 6) to ensure that
-(l,k)-mers are unique in the genome often gives better results. The
+human genome, setting k to a higher value (e.g. 6) to ensure that
+(el,k)-mers are unique in the genome often gives better results. The
 coverage parameter should be set to reflect the coverage of the Rmap
 data.
 
@@ -59,3 +59,24 @@ elmeri as follows:
 
 elmeri -i ecoli-sample/ecoli-2000.valouev -o ecoli-sample/ecoli-2000-corrected.valouev
 
+## Outputting Rmaps sharing (el,k)-mers
+
+The elmeri-index binary can be used to output pairs of Rmaps that
+share (el,k)-mers:
+
+elmeri-index <input Rmaps> <el> <output file> <spacing pattern> <count threshold> <merge similarity threshold>
+
+| Parameters: |  |
+| --- | --- |
+| <input Rmaps>     | Input file of Rmaps to be indexed |
+| <el>             | Size of (el,k)-mers in kbp |
+| <output file>     | Output file for pairs of related Rmaps |
+| <spacing pattern> | Spacing pattern for spaced seeds.(e.g. 11111111110001110110010010011101001110001010010100001010011000010111100000001100) |
+| <count threshold> | Threshold for the number of shared (el,k)-mers two Rmaps have to share to be considered related. |
+| <merge similarity threshold> | Threshold for merging similar (el,k)-mers in the index. |
+
+The input Rmaps should be in the same format as for Elmeri. The output
+is provided in dot graph format where the nodes are the Rmaps (labeled
+by integers giving their order in the input file) and edges represent
+relatedness of the Rmaps. The weight of the edges gives the number of
+(el,k)-mers the Rmaps share.

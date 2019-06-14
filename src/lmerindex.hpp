@@ -37,10 +37,6 @@
 #define REVERSE 1
 
 
-//#define KMER_INDEX  // Enable this to use a regular k-mer index
-
-//#define DOT_OUTPUT // Enable this to output related Rmaps in a dot graph format
-
 // This is needed so we can insert pairs of integers into unordered sets
 namespace std {
 template <> struct hash<std::pair<int, int>> {

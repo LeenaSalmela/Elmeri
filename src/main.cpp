@@ -23,7 +23,9 @@
 #include <fstream>
 #include <algorithm>
 
-#define DOT_OUTPUT
+//#define KMER_INDEX  // Enable this to use a regular k-mer index
+
+#define DOT_OUTPUT // Enable this to output related Rmaps in a dot graph format
 
 #define MINK 5                    // Minimum number of fragments required in an el-mer. Set to 0 for a regular el-mer index.
 

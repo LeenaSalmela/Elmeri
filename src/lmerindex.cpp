@@ -246,7 +246,7 @@ std::unordered_set<std::pair<std::string, int> > lmer_index::extract_lmers(std::
 /**
  * Insert a Rmap represented as a vector of cut sited to the mer map.
  * cuts = the cut sites
- * rma_count = index of the rmap
+ * rmap_count = index of the rmap
  */
 void lmer_index::insert(std::vector<double> cuts, int rmap_count) {
   // Extract the mers
