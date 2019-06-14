@@ -16,7 +16,13 @@
 #
 #  You should have received a copy of the GNU Affero General Public License
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- 
+
+# A script for converting Rmaps in the BNX format to the format
+# accepted by elmeri. The output is written to standard output.
+#
+# Usage:
+# python bnx2valouev.py <input bnx file> > <output file>
+
 import sys
 
 bnxfile = sys.argv[1]
