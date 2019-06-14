@@ -21,16 +21,16 @@ elmeri [parameters]
 
 | Required parameters: |  |
 | --- | --- |
-| -i <input file>     | Input file of Rmaps to be corrected |
-| -o <output file>    | Output file for corrected Rmaps |
+| -i input_file     | Input file of Rmaps to be corrected |
+| -o output_file    | Output file for corrected Rmaps |
 
 | Optional parameters: |   |
 | --- | --- |
-| -l <ell>            | Size of (el,k)-mers in kbp (default: 80) |
-| -k <k>              | Minimum size of (el,k)-mers in number of fragments (default: 5) |
-| -s <spacing pattern> | Spacing pattern for spaced seeds.(default: 11111111110001110110010010011101001110001010010100001010011000010111100000001100) |
-| -c <coverage>         | Maximum number of Rmaps in an alignment. If set to > 64, will be reset to 64. (default: 64) |
-| -t <similarity threshold> | Threshold for merging similar (el,k)-mers in the index. (default: 5) |
+| -l el            | Size of (el,k)-mers in kbp (default: 80) |
+| -k k              | Minimum size of (el,k)-mers in number of fragments (default: 5) |
+| -s spacing_pattern | Spacing pattern for spaced seeds.(default: 11111111110001110110010010011101001110001010010100001010011000010111100000001100) |
+| -c coverage         | Maximum number of Rmaps in an alignment. If set to > 64, will be reset to 64. (default: 64) |
+| -t similarity threshold | Threshold for merging similar (el,k)-mers in the index. (default: 5) |
 
 The default parameters work well on small to medium sized genomes when
 the coverage of the Rmaps is high. For a large genome such as the
@@ -64,16 +64,16 @@ elmeri -i ecoli-sample/ecoli-2000.valouev -o ecoli-sample/ecoli-2000-corrected.v
 The elmeri-index binary can be used to output pairs of Rmaps that
 share (el,k)-mers:
 
-elmeri-index <input Rmaps> <el> <output file> <spacing pattern> <count threshold> <merge similarity threshold>
+elmeri-index input_Rmaps el output_file spacing_pattern count_threshold merge_similarity_threshold
 
 | Parameters: |  |
 | --- | --- |
-| <input Rmaps>     | Input file of Rmaps to be indexed |
-| <el>             | Size of (el,k)-mers in kbp |
-| <output file>     | Output file for pairs of related Rmaps |
-| <spacing pattern> | Spacing pattern for spaced seeds.(e.g. 11111111110001110110010010011101001110001010010100001010011000010111100000001100) |
-| <count threshold> | Threshold for the number of shared (el,k)-mers two Rmaps have to share to be considered related. |
-| <merge similarity threshold> | Threshold for merging similar (el,k)-mers in the index. |
+| input_Rmaps     | Input file of Rmaps to be indexed |
+| el             | Size of (el,k)-mers in kbp |
+| output_file     | Output file for pairs of related Rmaps |
+| spacing_pattern | Spacing pattern for spaced seeds.(e.g. 11111111110001110110010010011101001110001010010100001010011000010111100000001100) |
+| count_threshold | Threshold for the number of shared (el,k)-mers two Rmaps have to share to be considered related. |
+| merge_similarity_threshold | Threshold for merging similar (el,k)-mers in the index. |
 
 The input Rmaps should be in the same format as for Elmeri. The output
 is provided in dot graph format where the nodes are the Rmaps (labeled
