@@ -28,7 +28,7 @@
 #define MIN_SHARED_MERS 2         // Minimum number of shared mers to consider two Rmaps related
 #define QUANTIZE_BAND 1.0         // Width of bin in quantization
 #define MIN_FRAGMENT_LEN 1.0      // Minimum fragment length considered
-#define MER_SIMILARITY_THRS 5     // Threshold for the similarity of mers to merge their list of Rmaps
+#define MER_SIMILARITY_THRS 10     // Threshold for the similarity of mers to merge their list of Rmaps
 
 #define READ_ID(i) ((i)/2)
 #define READ_ORI(i) ((i)%2)

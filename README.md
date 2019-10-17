@@ -30,7 +30,7 @@ elmeri [parameters]
 | -k k              | Minimum size of (el,k)-mers in number of fragments (default: 5) |
 | -s spacing_pattern | Spacing pattern for spaced seeds.(default: 11111111110001110110010010011101001110001010010100001010011000010111100000001100) |
 | -c coverage         | Maximum number of Rmaps in an alignment. If set to > 64, will be reset to 64. (default: 64) |
-| -t similarity threshold | Threshold for merging similar (el,k)-mers in the index. (default: 5) |
+| -t similarity threshold | Threshold for merging similar (el,k)-mers in the index. (default: 10) |
 
 The default parameters work well on small to medium sized genomes when
 the coverage of the Rmaps is high. For a large genome such as the
@@ -80,3 +80,7 @@ is provided in dot graph format where the nodes are the Rmaps (labeled
 by integers giving their order in the input file) and edges represent
 relatedness of the Rmaps. The weight of the edges gives the number of
 (el,k)-mers the Rmaps share.
+
+## Changes
+
+17-10-2019: Fixed a bug in merging similar (l,k)-mers. Default merge similarity threshold is now 10 to get similar performance as earlier with default values.

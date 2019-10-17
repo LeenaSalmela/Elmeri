@@ -58,7 +58,7 @@ void usage(char *prog_name) {
  * -k <k> (default: 5)
  * -s <spacing pattern> (default: 11111111110001110110010010011101001110001010010100001010011000010111100000001100)
  * -c <coverage> (default: 64, maximum number of Rmaps in an alignment, if set to > 64, will be reset to 64)
- * -t <similarity threshold> (default: 5, threshold for merging similar (el,k)-mers in the index)
+ * -t <similarity threshold> (default: 10, threshold for merging similar (el,k)-mers in the index)
  */
 int main(int argc, char *argv[]) {
 
