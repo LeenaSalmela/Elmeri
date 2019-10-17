@@ -34,6 +34,8 @@
 #include <fstream>
 #include <algorithm>
 
+#include <set>
+
 //#define DEBUG
 
 //#define DOT_OUTPUT
@@ -156,10 +158,26 @@ int main(int argc, char *argv[]) {
 
     // (el,k)-mer index
     lmer_index lind;
-    
+
     // Read the Rmaps and initialize the index
     lind.init(infilename, ell, mink, gap_pattern, sim_threshold);
     int total_reads = lind.rmaps.size();
+
+#ifdef DEBUG
+    for(auto it = lind.map.begin(); it != lind.map.end(); ++it) {
+      // std::string q = it->first;
+      // std::cout << q << std::endl;
+      std::unordered_set<std::pair<int,int> >* q = it->second;
+      std::set<int> q2;
+      for(auto it2 = q->begin(); it2 != q->end(); ++it2) {
+	q2.insert(it2->first);
+      }
+      for(auto it3 = q2.begin(); it3 != q2.end(); ++it3) {
+	std::cout << "," << *it3;
+      }
+      std::cout << std::endl;
+    }
+#endif
 
     /* Find for each read other reads that shares most (el,k)-mers with it */
     int good_aligns = 0;

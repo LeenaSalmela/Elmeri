@@ -102,7 +102,7 @@ std::unordered_set<std::pair<std::string, int> > lmer_index::extract_lmers(std::
       qs = qs + "," + std::to_string(qfrags[jj]);
     }
 #ifdef DEBUG
-    std::cout << "*" << qs << " " << first_used_cut << std::endl;
+    std::cout << qs << std::endl;
 #endif
     lmers.insert(std::make_pair(qs,first_used_cut));
   }      
@@ -191,7 +191,7 @@ std::unordered_set<std::pair<std::string, int> > lmer_index::extract_lmers(std::
 	qs = qs + "," + std::to_string(qfrags[jj]);
       }
 #ifdef DEBUG      
-      std::cout << qs << " " << first_used_cut << std::endl;
+      std::cout << qs << std::endl;
 #endif
       lmers.insert(std::make_pair(qs,first_used_cut));
     }
@@ -748,10 +748,12 @@ void lmer_index::merge() {
 	    if (map[q2]->size() <= map[q]->size()) {
 	      map[q]->insert(map[q2]->begin(), map[q2]->end());
 	      mergetree[q2] = q;
+	      mergesize[q] = qsize + q2size;
 	      delete map[q2];
 	    } else {
 	      map[q2]->insert(map[q]->begin(), map[q]->end());
 	      mergetree[q] = q2;
+	      mergesize[q2] = qsize + q2size;
 	      delete map[q];
 	      q = q2;
 	    }
